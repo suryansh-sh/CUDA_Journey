@@ -1,0 +1,9 @@
+# 2D Thermal Conduction with Gauss-Seidel iterative solver
+
+2D heat conduction equation is solved with Gauss - Seidel as the iterative solver. Gauss-Seidel is used since the convergence is faster than Jacobi and also since the matrix is updated in place, we don't need to keep 2 copy of the matrix at $n$ and $n+1$ iteration. Note that the parallel implementation would vary slightly compared to the serial version since the domain boundary points of neighbors are at timestep $n$ and updated to $n+1$ using `MPI_Sendrecv` at end of every iteration. This would not change the final solution, but total number of iteration would change. The solver results were verified on $10 \times 10$ matrices with $5000$ iteration while the timing is for $50000 \times 50000$ grid size with $50000$ iterations. I would expect the performance of `MultiGPU_MPI_stream.cu` to be better as grid size and number of GPUs are increased. While the code can run on `n` GPUs, I only had access to 2 GPU, so only verified upto 2 GPU case. The wall clock timing shown is averaged per process. Also domain is decomposed in chunks of rows since C++ is row-major. Can also be decomposed in both x and y dimension for large multiGPU setup.
+
+| Filename                                        | Description                                                  | wall-time [s] |
+| ----------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [<u>MultiGPU_MPI</u>](./MultiGPU_MPI.cu)        | CUDA aware MPI compatible with multi GPU setup               | 569.653       |
+| [MultiGPU_MPI_stream](./MultiGPU_MPI_stream.cu) | Similar to `MultiGPU_MPI.cu` but streams are used to put halo exchange region on boundary stream and non domain boundary point on compute streams to hide latency | 561.96        |
+
