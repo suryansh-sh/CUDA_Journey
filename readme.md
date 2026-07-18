@@ -12,6 +12,7 @@
 | `l7_transient_heat_equation`             | Transient heat equation for conduction solved on CPU for baseline and then using openMP, CUDA (via openACC) and only CUDA. |
 | `multiGPU_ThermalConduction`             | Thermal conduction problem for multiGPU setup using CUDA aware MPI. Streams are used to try to hide communication latency during computation of non-halo grid points. |
 | `l8_shared_mem_matmul.cu`                | Matrix multiplication using shared memory                    |
+| `l9_matmul_with_1D_Blocktiling.cu`       | Matmul using 1D blocktiling and shared memory                |
 
 
 
