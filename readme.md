@@ -13,6 +13,7 @@
 | `multiGPU_ThermalConduction`             | Thermal conduction problem for multiGPU setup using CUDA aware MPI. Streams are used to try to hide communication latency during computation of non-halo grid points. |
 | `l8_shared_mem_matmul.cu`                | Matrix multiplication using shared memory                    |
 | `l9_matmul_with_1D_Blocktiling.cu`       | Matmul using 1D blocktiling and shared memory                |
+| `dot_product.cu`                         | Dot product of two vector using atomic, shared memory and warp shuffle. Kernel run time on 5090 laptop GPU = 2.33 ms, 83.07 us, 52.13 us, 40,13 us corresponding to K1, K2, K3 and K4 in the code. |
 
 
 
